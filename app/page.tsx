@@ -16,9 +16,21 @@ const Page = () => {
   const opacityRed = useTransform(scrollYProgress, [0, 0.5], [1, 0])
 
   // Green slides up
+  // const yGreen = useTransform(scrollYProgress, [0, 0.5], ['100%', '0%'])
+
   const yGreen = useTransform(scrollYProgress, [0, 0.5], ['100%', '0%'])
+  const xGreen = useTransform(scrollYProgress, [0.6, 1], ['0%', '-100%'])
+  const zGreen = useTransform(scrollYProgress, [0.6, 1], [0, 200])
   // Blue slides left
   const xBlue = useTransform(scrollYProgress, [0, 0.5], ['0%', '-100%'])
+  const zBlue = useTransform(scrollYProgress, [0.6,1], [50,0])
+  const scaleBlue = useTransform(scrollYProgress, [0.6,1], [1,0.7])
+  const opacityBlue = useTransform(scrollYProgress, [0.6,1], [1, 0])
+
+  const yAmber = useTransform(scrollYProgress, [0.6, 1], ['100%', '0%'])
+
+  const text1Opacity = useTransform(scrollYProgress, [0.5,0.7], [1,0])
+  const text2Opacity = useTransform(scrollYProgress, [0.7,0.9], [0,1])
 
   return (
     <div className="min-h-screen w-screen">
@@ -41,16 +53,27 @@ const Page = () => {
 
           {/* Green layer */}
           <motion.div
-            style={{ y: yGreen }}
-            className="bg-green-800 text-4xl text-neutral-200 font-medium tracking-tight h-screen w-1/2 absolute right-0 rounded-[2.5rem] p-10"
+            style={{ y: yGreen, x: xGreen, z: zGreen }}
+            className="bg-green-800 text-4xl text-neutral-200 font-medium z-50 tracking-tight h-screen w-1/2 absolute right-0 rounded-[2.5rem] p-10"
           >
-             <div>Enjoy the view through - the wide panoramic glass window</div>
+            <motion.div style={{opacity: text1Opacity}} className='absolute top-10 left-10 w-lg'>Enjoy the view through - the wide panoramic glass window</motion.div>
+            <motion.div style={{opacity: text2Opacity}}  className='absolute top-10 left-10 w-lg'>Yo, I came!!!</motion.div>
+          </motion.div>
+
+          <motion.div
+            style={{ y: yAmber }}
+            className="bg-amber-800 text-4xl text-neutral-200 font-medium z-0 tracking-tight h-screen w-1/2 absolute right-0 rounded-[2.5rem] overflow-hidden"
+          >
+             <img
+              src="https://cdn.cosmos.so/2682cdc2-08f0-4998-aed8-53db9ae9c3d5.?format=jpeg"
+              className="w-full h-full object-cover"
+            />
           </motion.div>
 
           {/* Blue layer */}
           <motion.div
-            style={{ x: xBlue }}
-            className="bg-blue-500 h-screen w-1/2 absolute right-0 z-50 rounded-[2.5rem] overflow-hidden"
+            style={{ x: xBlue, scale: scaleBlue, opacity: opacityBlue, z: zBlue }}
+            className="bg-blue-500 h-screen w-1/2 absolute right-0 rounded-[2.5rem] overflow-hidden"
           >
             <img
               src="https://cdn.cosmos.so/2682cdc2-08f0-4998-aed8-53db9ae9c3d5.?format=jpeg"
